@@ -63,14 +63,15 @@ if args.temperature < 1e-3:
     parser.error("--temperature has to be greater or equal 1e-3.")
 
 if args.model == 'Transformer':
-    model = model.TransformerModel()
+    model = model.TransformerModel
 else:
-    model = model.RNNModel()
+    model = model.RNNModel
 
 
 with open(args.checkpoint, 'rb') as f:
     # model = torch.load(f, map_location=device)
-    model.load_state_dict(torch.load(f), map_location=device)
+    model.load_state_dict(torch.load(f))
+
 model.eval()
 
 corpus = data.Corpus(args.data)
