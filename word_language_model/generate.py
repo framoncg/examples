@@ -84,7 +84,6 @@ else:
 
 
 with open(args.checkpoint, 'rb') as f:
-    # model = torch.load(f, map_location=device)
     model.load_state_dict(torch.load(f, map_location=device))
 
 model.eval()

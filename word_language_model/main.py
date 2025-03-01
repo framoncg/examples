@@ -113,8 +113,6 @@ test_data = batchify(corpus.test, eval_batch_size)
 ###############################################################################
 # Build the model
 ###############################################################################
-# torch.serialization.add_safe_globals([model.RNNModel, model.TransformerModel])
-
 ntokens = len(corpus.dictionary)
 if args.model == 'Transformer':
     model = model.TransformerModel(ntokens, args.emsize, args.nhead, args.nhid, args.nlayers, args.dropout).to(device)
@@ -254,8 +252,6 @@ except KeyboardInterrupt:
 # Load the best saved model.
 with open(args.save, 'rb') as f:
     model.load_state_dict(torch.load(f))
-    # torch.serialization.add_safe_globals([model])
-    # model = torch.load(f)
     # after load the rnn params are not a continuous chunk of memory
     # this makes them a continuous chunk, and will speed up forward pass
     # Currently, only rnn model supports flatten_parameters function.
